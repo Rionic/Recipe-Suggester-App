@@ -28,11 +28,20 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-media {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 20%;
 }
+
+/* .recipe-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recipe-card img { 
+  max-width: 20%;
+  height: auto;
+} */
