@@ -1,5 +1,4 @@
 const express = require('express');
-const axios = require('axios');
 const app = express();
 const cors = require('cors');
 
@@ -13,7 +12,7 @@ app.get('/api/recipes', async (req, res) => {
     const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${apiKey}&number=3`;
 
     try {
-        const response = await axios.get(apiUrl);
+        const response = await fetch(apiUrl);
         res.json(response.data.results);
     } catch(error) {
         console.error('Error fetching recipes:', error);
