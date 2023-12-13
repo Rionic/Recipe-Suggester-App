@@ -3,6 +3,7 @@ import '../App.css'
 import { Card, CardMedia, Typography } from '@mui/material';
 
 function RecipeCard(props) {
+    console.log(props.ingredients);
     return (
         <Card className="card-media">
             <CardMedia
@@ -10,18 +11,17 @@ function RecipeCard(props) {
                 height="200"
                 image={props.imageUrl}
                 alt={props.title}
-                
-                // style={{ maxWidth: '100%', width: 'auto' }}
             />
             <Typography variant="h5">{props.title}</Typography>
             <Typography variant="body1">{props.description}</Typography>
+            {props.ingredients && props.ingredients.map((ingredient, index) => (
+                <div>
+                    <Typography variant="body1">{ingredient.amount}</Typography>
+                    <Typography variant="body1">{ingredient.name}</Typography>
+                </div>
+            ))}
         </Card>
-        // <div className="recipe-card">
-        //     <img src={props.imageUrl} alt={props.title} />
-        //     <h3>{props.title}</h3>
-        //     <p>{props.description}</p>
-        // </div>
-    );
+    ); // Next task: grab measurements, and make display nice
 }
 
 export default RecipeCard;

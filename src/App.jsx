@@ -12,6 +12,7 @@ const dietaryPreferencesList = ['Vegetarian', 'Vegan', 'Gluten Free', 'Ketogenic
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [ids, setIds] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({
     ingredients: '',
     dietaryPreferences: [],
@@ -72,7 +73,9 @@ function App() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+
       // Handle the data containing ingredients for multiple recipes
+      setIngredients(data);
       console.log('Ingredients for recipes:', data);
     } catch(error) {
       console.error('There was a problem with the fetch operation:', error);
@@ -122,12 +125,13 @@ function App() {
           </form>
 
           <div className="card-list">
-            {recipes.map((recipe) => (
+            {recipes.map((recipe, index) => (
               <RecipeCard
                 key={recipe.id}
                 title={recipe.title}
                 imageUrl={recipe.image}
                 description={recipe.description}
+                ingredients={ingredients[index]}
               />
             ))}
           </div>
