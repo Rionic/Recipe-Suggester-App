@@ -11,14 +11,18 @@ const dietaryPreferencesList = ['Vegetarian', 'Vegan', 'Gluten Free', 'Ketogenic
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+  const [ids, setIds] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({
     ingredients: '',
     dietaryPreferences: [],
     recipeName: '',
   });
 
+  useEffect( () => {
+    if (ids.length > 0) fetchIngredients(ids);
+  }, [ids])
+
   const handleInputChange = (event) => {
-    console.log('event', event);
     const { name, value } = event.target;
     setSearchCriteria({ ...searchCriteria, [name]: value });
   }
@@ -33,31 +37,45 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const fetchedRecipes = await fetchRecipes();
+    const recipeIds = fetchedRecipes.map(recipe => recipe.id); 
+    setIds(recipeIds);
+  }
+
+  const fetchRecipes = async () => {
     try {
-      const queryParams = new URLSearchParams();
-
-      if (searchCriteria.ingredients !== '') {
-        queryParams.append('ingredients', searchCriteria.ingredients);
-      }
-
-      if (searchCriteria.dietaryPreferences.length > 0) {
-        queryParams.append('diet', searchCriteria.dietaryPreferences);
-      }
-
-      if (searchCriteria.recipeName !== '') {
-        queryParams.append('recipeName', searchCriteria.recipeName);
-      }
-
-      const queryString = queryParams.toString();
-      console.log('queryString', queryString);
-      const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?${queryString}&apiKey=96ea7050c7574dca93f0aae38effe795`);
+      const response = await fetch('http://localhost:3001/api/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(searchCriteria),
+      });
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
       setRecipes(data.results);
+      return data.results;
     } catch(error) {
-      console.error('There was a problem with the fetch operation', error);
+      console.error('There was a problem with the fetch operation:', error);
+      return [];
+    }
+  }
+
+  const fetchIngredients = async (recipeIds) => {
+    try {
+      const joinedIds = recipeIds.join(',');
+      const response = await fetch(`http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`)
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      // Handle the data containing ingredients for multiple recipes
+      console.log('Ingredients for recipes:', data);
+    } catch(error) {
+      console.error('There was a problem with the fetch operation:', error);
     }
   }
 
@@ -103,7 +121,6 @@ function App() {
             </Button>
           </form>
 
-          {console.log(recipes)}
           <div className="card-list">
             {recipes.map((recipe) => (
               <RecipeCard
