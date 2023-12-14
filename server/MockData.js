@@ -1,71 +1,71 @@
-const fakeRecipesData = {
+const mockRecipesData = {
     results: [
-      {
-        id: 1,
-        title: "Spaghetti Carbonara",
-        image: "https://www.example.com/images/spaghetti-carbonara.jpg",
-        description: "Classic Italian pasta dish with eggs, cheese, and pancetta.",
-      },
-      {
-        id: 2,
-        title: "Vegetable Stir-Fry",
-        image: "https://www.example.com/images/vegetable-stir-fry.jpg",
-        description: "Healthy stir-fried vegetables in a savory sauce.",
-      },
-      {
-        id: 3,
-        title: "Chicken Alfredo",
-        image: "https://www.example.com/images/chicken-alfredo.jpg",
-        description: "Creamy pasta with grilled chicken and parmesan cheese.",
-      },
-      {
-        id: 4,
-        title: "Mushroom Risotto",
-        image: "https://www.example.com/images/mushroom-risotto.jpg",
-        description: "Rich and flavorful Italian rice dish with mushrooms and cheese.",
-      },
-      {
-        id: 5,
-        title: "Tacos",
-        image: "https://www.example.com/images/tacos.jpg",
-        description: "Mexican street-style tacos with various fillings and salsa.",
-      },
-      {
-        id: 6,
-        title: "Salmon Teriyaki",
-        image: "https://www.example.com/images/salmon-teriyaki.jpg",
-        description: "Grilled salmon glazed with a sweet and savory teriyaki sauce.",
-      },
-      {
-        id: 7,
-        title: "Caprese Salad",
-        image: "https://www.example.com/images/caprese-salad.jpg",
-        description: "Fresh Italian salad with tomatoes, mozzarella, basil, and balsamic glaze.",
-      },
-      {
-        id: 8,
-        title: "Beef Stroganoff",
-        image: "https://www.example.com/images/beef-stroganoff.jpg",
-        description: "Tender beef in a creamy mushroom sauce served over noodles.",
-      },
-      {
-        id: 9,
-        title: "Pesto Pasta",
-        image: "https://www.example.com/images/pesto-pasta.jpg",
-        description: "Pasta coated in a vibrant basil pesto sauce.",
-      },
-      {
-        id: 10,
-        title: "Grilled Vegetable Skewers",
-        image: "https://www.example.com/images/grilled-vegetable-skewers.jpg",
-        description: "Assorted vegetables grilled to perfection on skewers.",
-      },
-    ],
+        {
+            "id": 782585,
+            "title": "Cannellini Bean and Asparagus Salad with Mushrooms",
+            "image": "https://spoonacular.com/recipeImages/782585-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 716426,
+            "title": "Cauliflower, Brown Rice, and Vegetable Fried Rice",
+            "image": "https://spoonacular.com/recipeImages/716426-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 715497,
+            "title": "Berry Banana Breakfast Smoothie",
+            "image": "https://spoonacular.com/recipeImages/715497-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 715415,
+            "title": "Red Lentil Soup with Chicken and Turnips",
+            "image": "https://spoonacular.com/recipeImages/715415-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 716406,
+            "title": "Asparagus and Pea Soup: Real Convenience Food",
+            "image": "https://spoonacular.com/recipeImages/716406-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 644387,
+            "title": "Garlicky Kale",
+            "image": "https://spoonacular.com/recipeImages/644387-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 715446,
+            "title": "Slow Cooker Beef Stew",
+            "image": "https://spoonacular.com/recipeImages/715446-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 782601,
+            "title": "Red Kidney Bean Jambalaya",
+            "image": "https://spoonacular.com/recipeImages/782601-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 795751,
+            "title": "Chicken Fajita Stuffed Bell Pepper",
+            "image": "https://spoonacular.com/recipeImages/795751-312x231.jpg",
+            "imageType": "jpg"
+        },
+        {
+            "id": 766453,
+            "title": "Hummus and Za'atar",
+            "image": "https://spoonacular.com/recipeImages/766453-312x231.jpg",
+            "imageType": "jpg"
+        }
+    ]
   };
   
 
 
-const fakeIngredientsData = [
+const mockIngredientsData = [
     [
         {
             "name": "cannellini beans",
@@ -508,5 +508,5 @@ const fakeIngredientsData = [
     ]
 ]
 
-exports.fakeRecipesData = fakeRecipesData;
-exports.fakeIngredientsData = fakeIngredientsData;
+exports.mockRecipesData = mockRecipesData;
+exports.mockIngredientsData = mockIngredientsData;

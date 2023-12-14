@@ -1,12 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
-const fakeData = require('./FakeData');
+const mockData = require('./MockData');
 const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 3001;
-const API_KEY = '96ea7050c7574dca93f0aae38effe795';
+const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
 app.use(express.json());
 
@@ -31,7 +31,7 @@ app.post('/api/search', async (req, res) => {
 
         // const queryString = queryParams.toString();
         // const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?${queryString}&apiKey=${API_KEY}`);
-        res.json(fakeData.fakeRecipesData);
+        res.json(mockData.mockRecipesData); // response.data
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
@@ -59,7 +59,7 @@ app.get('/api/recipe/ingredients', async (req, res) => {
         //     return ingredients;
         // })
         // console.log('ingredients', ingredientsList);
-        res.json(fakeData.fakeIngredientsData);
+        res.json(mockData.mockIngredientsData); //ingredientsList
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
@@ -69,18 +69,3 @@ app.get('/api/recipe/ingredients', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-// app.get('/api/recipes', async (req, res) => {
-//     const query = 'pasta' //req.query.query;
-//     console.log('query', query)
-//     const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${apiKey}&number=3`;
-
-//     try {
-//         const response = await fetch(apiUrl);
-//         res.json(response.data.results);
-//     } catch(error) {
-//         console.error('Error fetching recipes:', error);
-//         res.status(500).json({error: 'Internal server error'});
-//     }
-// });
-

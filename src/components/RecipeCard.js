@@ -18,7 +18,19 @@ function RecipeCard(props) {
                 image={props.imageUrl}
                 alt={props.title}
             />
-            <Typography variant="h5">{props.title}</Typography>
+            <Typography variant="h6"
+                style={{
+                    paddingLeft: '5px',
+                    paddingRight: '5px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                }}
+            >
+                {props.title}
+            </Typography>
             <Typography style={{
                     margin: '20px',
                     overflow: 'hidden',
@@ -30,7 +42,8 @@ function RecipeCard(props) {
                 variant="body1"
                 align={'left'}
             >
-                {props.description}
+                {props.description} 
+                {/* turns out description doesn't exist. find something else */}
             </Typography>
             <Accordion
                 className="ingredients-accordion"
