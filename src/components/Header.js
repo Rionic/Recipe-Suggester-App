@@ -1,8 +1,9 @@
+import '../App.css'
 import React from 'react';
-
+import { Typography } from '@mui/material';
 function Header() {
     return (
-        <h1>Recipe Finder!</h1>
+        <Typography className="header" variant="h3">Recipe Finder</Typography>
     );
 }
 

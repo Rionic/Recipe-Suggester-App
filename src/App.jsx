@@ -74,7 +74,6 @@ function App() {
       }
       const data = await response.json();
 
-      // Handle the data containing ingredients for multiple recipes
       setIngredients(data);
       console.log('Ingredients for recipes:', data);
     } catch(error) {
@@ -87,7 +86,6 @@ function App() {
       <div className="App">
         <Header />
         <main>
-          <RecipeList />
           <form onSubmit={handleSubmit}>
             <TextField
               name="ingredients"
@@ -104,7 +102,6 @@ function App() {
               onChange={handleInputChange}
             />
             <FormGroup>
-              <label>Choose dietary preferences</label>
               {dietaryPreferencesList.map((preference, index) => (
                 <FormControlLabel
                   key={index}
@@ -123,7 +120,7 @@ function App() {
               Search Recipes
             </Button>
           </form>
-
+          {/* <RecipeList /> */}
           <div className="card-list">
             {recipes.map((recipe, index) => (
               <RecipeCard
