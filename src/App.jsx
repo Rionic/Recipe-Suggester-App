@@ -56,7 +56,7 @@ function App() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      console.log('data', data);
+      console.log('recipe results', data.results);
       setRecipes(data.results);
       return data.results;
     } catch(error) {

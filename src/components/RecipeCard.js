@@ -9,7 +9,6 @@ function RecipeCard(props) {
         setExpanded(!expanded);
     };
 
-    console.log(props.ingredients);
     return (
         <Card className={`card-media ${expanded ? 'expanded-card' : ''}`}>
             <CardMedia
@@ -43,7 +42,7 @@ function RecipeCard(props) {
                 align={'left'}
             >
                 {props.description} 
-                {/* turns out description doesn't exist. find something else */}
+                {/* TODO: Turns out description doesn't exist. Find something else */}
             </Typography>
             <Accordion
                 className="ingredients-accordion"
@@ -61,13 +60,13 @@ function RecipeCard(props) {
                 <AccordionDetails>
                     {props.ingredients && props.ingredients.map((ingredient, index) => (
                         <div key={index}>
-                            <Typography variant="body1">{ingredient.amount + ' '}{ingredient.name}</Typography>
+                            <Typography variant="body1">{ingredient.amount + ' ' + ingredient.unit + ' ' + ingredient.name + ','}</Typography>
                         </div>
                     ))}
                 </AccordionDetails>
             </Accordion>
         </Card>
-    ); // Next task: grab measurements, and make display nice
+    ); // TODO: and make display nice, click image to go to recipe link
 }
 
 export default RecipeCard;
