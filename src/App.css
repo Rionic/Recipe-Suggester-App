@@ -36,8 +36,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between; 
-  width: 20%; 
+  justify-content: space-between;
+  width: 20%;
   height: 400px;
   /* might have to change above to max-width */
   margin: 20px;
@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 20%; 
+  width: 20%;
   height: auto;
   /* might have to change above to max-width */
   margin: 20px;
@@ -66,5 +66,5 @@
 }
 
 .ingredients-accordion {
-  width: '100%';  
+  width: "100%";
 }

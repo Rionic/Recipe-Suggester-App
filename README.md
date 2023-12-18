@@ -29,15 +29,15 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-
-
 Current features
+
 - React as framework
 - Material UI for crisp and clean interface
 - Spoonacular API to fetch recipe data
 - CSS for styling
 
 Future features
+
 - Login system
 - Save recipes to account
 - Database
