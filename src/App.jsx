@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import RecipeCard from './components/RecipeCard';
-import RecipeList from './components/RecipeList';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material'
+import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 const theme = createTheme();
 const dietaryPreferencesList = ['Vegetarian', 'Vegan', 'Gluten Free', 'Ketogenic', 'Dairy Free']; // Example list of dietary preferences
@@ -19,7 +18,7 @@ function App() {
     recipeName: '',
   });
 
-  useEffect( () => {
+  useEffect(() => {
     if (ids.length > 0) fetchIngredients(ids);
   }, [ids])
 
@@ -31,15 +30,15 @@ function App() {
   const handlePreferenceChange = (event) => {
     const { value, checked } = event.target;
     const updatedPreferences = checked
-    ? [...searchCriteria.dietaryPreferences, value]
-    : searchCriteria.dietaryPreferences.filter((preference) => preference !== value);
+      ? [...searchCriteria.dietaryPreferences, value]
+      : searchCriteria.dietaryPreferences.filter((preference) => preference !== value);
     setSearchCriteria({ ...searchCriteria, dietaryPreferences: updatedPreferences });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const fetchedRecipes = await fetchRecipes();
-    const recipeIds = fetchedRecipes.map(recipe => recipe.id); 
+    const recipeIds = fetchedRecipes.map(recipe => recipe.id);
     setIds(recipeIds);
   }
 
@@ -59,7 +58,7 @@ function App() {
       console.log('recipe results', data.results);
       setRecipes(data.results);
       return data.results;
-    } catch(error) {
+    } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
       return [];
     }
@@ -69,7 +68,7 @@ function App() {
     try {
       const joinedIds = recipeIds.join(',');
       const response = await fetch(`http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`)
-      
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -77,7 +76,7 @@ function App() {
 
       setIngredients(data);
       console.log('Ingredients for recipes:', data);
-    } catch(error) {
+    } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
   }
@@ -88,35 +87,41 @@ function App() {
         <Header />
         <main>
           <form onSubmit={handleSubmit}>
-            <TextField
-              name="ingredients"
-              label="Enter ingredients"
-              variant="outlined"
-              value={searchCriteria.ingredients}
-              onChange={handleInputChange}
-            />
-            <TextField
-              name="recipeName"
-              label="Enter recipe"
-              variant="outlined"
-              value={searchCriteria.recipeName}
-              onChange={handleInputChange}
-            />
-            <FormGroup>
-              {dietaryPreferencesList.map((preference, index) => (
-                <FormControlLabel
-                  key={index}
-                  control={
-                    <Checkbox
-                      checked={searchCriteria.dietaryPreferences.includes(preference)}
-                      onChange={handlePreferenceChange}
-                      value={preference}
-                    />
-                  }
-                  label={preference}
-                />
-              ))}
-            </FormGroup>
+            <div className="filters">
+              <TextField
+                name="ingredients"
+                label="Enter ingredients"
+                variant="outlined"
+                value={searchCriteria.ingredients}
+                onChange={handleInputChange}
+              />
+              <TextField
+                name="recipeName"
+                label="Enter recipe"
+                variant="outlined"
+                value={searchCriteria.recipeName}
+                onChange={handleInputChange}
+              />
+              <FormControl variant="outlined">
+                <InputLabel id="dietary-preferences-label">Dietary Preferences</InputLabel>
+                <Select
+                  labelId="dietary-preferences-label"
+                  id="dietary-preferences"
+                  multiple
+                  value={searchCriteria.dietaryPreferences}
+                  onChange={handlePreferenceChange}
+                  label="Dietary Preferences"
+                  style={{width: '210.4px'}}
+                  renderValue={(selected) => selected.join(', ')}
+                >
+                  {dietaryPreferencesList.map((preference, index) => (
+                    <MenuItem key={index} value={preference}>
+                      {preference}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
             <Button type="Submit" variant="contained" color="primary">
               Search Recipes
             </Button>
