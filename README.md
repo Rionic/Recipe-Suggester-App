@@ -43,3 +43,4 @@ Future features
 - Database
 - Test cases
 - Prettify code
+- Dockerize
