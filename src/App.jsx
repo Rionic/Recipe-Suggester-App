@@ -43,15 +43,10 @@ function App() {
   };
 
   const handlePreferenceChange = (event) => {
-    const { value, checked } = event.target;
-    const updatedPreferences = checked
-      ? [...searchCriteria.dietaryPreferences, value]
-      : searchCriteria.dietaryPreferences.filter(
-          (preference) => preference !== value,
-        );
+    const value = event.target.value;
     setSearchCriteria({
       ...searchCriteria,
-      dietaryPreferences: updatedPreferences,
+      dietaryPreferences: value,
     });
   };
 
@@ -97,7 +92,6 @@ function App() {
 
       setIngredients(data.ingredientsList);
       setUrls(data.urlList);
-      console.log('Ingredients for recipes:', data);
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
