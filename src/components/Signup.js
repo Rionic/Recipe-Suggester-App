@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../App.css';
 import { Typography, TextField, Button } from '@mui/material';
 import { styled } from '@mui/system';
 
 function Signup() {
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  const handlePasswordChange = () => {
+    confirmPasswordRef.current?.blur();
+  };
+  
+  const handleConfirmPasswordChange = () => {
+    passwordRef.current?.blur();
+  };
+
   return (
     <div>
       <Typography variant="h4" align="center" gutterBottom>
@@ -31,12 +43,18 @@ function Signup() {
           name="password"
           variant="outlined"
           required
+          type="password"
+          inputRef={passwordRef}
+          onChange={handlePasswordChange}
         />
         <TextField
           label="Confirm Password"
           name="confirmPassword"
           variant="outlined"
           required
+          type="password"
+          inputRef={confirmPasswordRef}
+          onChange={handleConfirmPasswordChange}
         />
         <Button
           type="submit"
