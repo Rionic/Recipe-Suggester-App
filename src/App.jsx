@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import Header from "./components/Header";
-import RecipeCard from "./components/RecipeCard";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState, useEffect } from 'react';
+import RoutesList from './RoutesList';
+import './App.css';
+import Header from './components/Header';
+import RecipeCard from './components/RecipeCard';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   TextField,
   Button,
@@ -10,15 +11,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
-} from "@mui/material";
+} from '@mui/material';
 
 const theme = createTheme();
 const dietaryPreferencesList = [
-  "Vegetarian",
-  "Vegan",
-  "Gluten Free",
-  "Ketogenic",
-  "Dairy Free",
+  'Vegetarian',
+  'Vegan',
+  'Gluten Free',
+  'Ketogenic',
+  'Dairy Free',
 ]; // Example list of dietary preferences
 
 function App() {
@@ -27,9 +28,9 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
   const [urls, setUrls] = useState([]);
   const [searchCriteria, setSearchCriteria] = useState({
-    ingredients: "",
+    ingredients: '',
     dietaryPreferences: [],
-    recipeName: "",
+    recipeName: '',
   });
 
   useEffect(() => {
@@ -63,42 +64,42 @@ function App() {
 
   const fetchRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/search", {
-        method: "POST",
+      const response = await fetch('http://localhost:3001/api/search', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(searchCriteria),
       });
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
       setRecipes(data.results);
       return data.results;
     } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
+      console.error('There was a problem with the fetch operation:', error);
       return [];
     }
   };
 
   const fetchIngredients = async (recipeIds) => {
     try {
-      const joinedIds = recipeIds.join(",");
+      const joinedIds = recipeIds.join(',');
       const response = await fetch(
         `http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`,
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       const data = await response.json();
 
       setIngredients(data.ingredientsList);
       setUrls(data.urlList);
-      console.log("Ingredients for recipes:", data);
+      console.log('Ingredients for recipes:', data);
     } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
+      console.error('There was a problem with the fetch operation:', error);
     }
   };
 
@@ -134,8 +135,8 @@ function App() {
                   value={searchCriteria.dietaryPreferences}
                   onChange={handlePreferenceChange}
                   label="Dietary Preferences"
-                  style={{ width: "210.4px" }}
-                  renderValue={(selected) => selected.join(", ")}
+                  style={{ width: '210.4px' }}
+                  renderValue={(selected) => selected.join(', ')}
                 >
                   {dietaryPreferencesList.map((preference, index) => (
                     <MenuItem key={index} value={preference}>

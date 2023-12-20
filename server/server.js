@@ -1,31 +1,31 @@
-const express = require("express");
-const axios = require("axios");
-const cors = require("cors");
-const mockData = require("./MockData");
+const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+const mockData = require('./MockData');
 const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 3001;
-const API_KEY = "2d60a10270894aaea2c880a8df71f2e3";
+const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
 app.use(express.json());
 
-app.post("/api/search", async (req, res) => {
+app.post('/api/search', async (req, res) => {
   try {
     const { ingredients, dietaryPreferences, recipeName } = req.body;
 
     const queryParams = new URLSearchParams();
 
     if (ingredients) {
-      queryParams.append("includeIngredients", ingredients);
+      queryParams.append('includeIngredients', ingredients);
     }
 
     if (dietaryPreferences) {
-      queryParams.append("diet", dietaryPreferences.join(","));
+      queryParams.append('diet', dietaryPreferences.join(','));
     }
 
     if (recipeName) {
-      queryParams.append("query", recipeName);
+      queryParams.append('query', recipeName);
     }
 
     const queryString = queryParams.toString();
@@ -34,25 +34,25 @@ app.post("/api/search", async (req, res) => {
     );
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.get("/api/recipe/ingredients", async (req, res) => {
+app.get('/api/recipe/ingredients', async (req, res) => {
   try {
     const { recipeIds } = req.query;
 
     if (!recipeIds) {
-      throw new Error("Recipe IDs are required");
+      throw new Error('Recipe IDs are required');
     }
 
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/informationBulk?ids=${
-        recipeIds.split(",")[0]
+        recipeIds.split(',')[0]
       }&apiKey=${API_KEY}`,
     );
     if (!response || response.status !== 200) {
-      throw new Error("Failed to fetch recipe details");
+      throw new Error('Failed to fetch recipe details');
     }
     const recipeDetails = response.data;
     let urlList = [];
@@ -73,7 +73,7 @@ app.get("/api/recipe/ingredients", async (req, res) => {
     };
     res.json(sendData);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

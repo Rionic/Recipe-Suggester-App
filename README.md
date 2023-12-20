@@ -35,6 +35,7 @@ Current features
 - Material UI for crisp and clean interface
 - Spoonacular API to fetch recipe data
 - CSS for styling
+- Prettified code
 
 Future features
 
@@ -42,5 +43,4 @@ Future features
 - Save recipes to account
 - Database
 - Test cases
-- Prettify code
 - Dockerize

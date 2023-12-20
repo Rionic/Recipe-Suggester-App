@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "../App.css";
+import React, { useState } from 'react';
+import '../App.css';
 import {
   Card,
   CardMedia,
@@ -7,8 +7,8 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function RecipeCard(props) {
   const [expanded, setExpanded] = useState(false);
@@ -16,26 +16,26 @@ function RecipeCard(props) {
     setExpanded(!expanded);
   };
   return (
-    <Card className={`card-media ${expanded ? "expanded-card" : ""}`}>
+    <Card className={`card-media ${expanded ? 'expanded-card' : ''}`}>
       <a href={props.sourceUrl} target="_blank" rel="noopener noreferrer">
         <CardMedia
           component="img"
           height="200"
           image={props.imageUrl}
           alt={props.title}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
         />
       </a>
       <Typography
         variant="h6"
         style={{
-          paddingLeft: "5px",
-          paddingRight: "5px",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          display: "-webkit-box",
+          paddingLeft: '5px',
+          paddingRight: '5px',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
           WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
+          WebkitBoxOrient: 'vertical',
         }}
       >
         {props.title}
@@ -44,7 +44,7 @@ function RecipeCard(props) {
         className="ingredients-accordion"
         expanded={expanded}
         onChange={handleExpansion}
-        style={{ width: "100%", position: "relative", bottom: "0px" }}
+        style={{ width: '100%', position: 'relative', bottom: '0px' }}
         sx={{ boxShadow: 0 }}
       >
         <AccordionSummary
@@ -60,11 +60,11 @@ function RecipeCard(props) {
               <div key={index}>
                 <Typography variant="body1">
                   {ingredient.amount +
-                    " " +
+                    ' ' +
                     ingredient.unit +
-                    " " +
+                    ' ' +
                     ingredient.name +
-                    ","}
+                    ','}
                 </Typography>
               </div>
             ))}

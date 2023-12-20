@@ -2,63 +2,63 @@ const mockRecipesData = {
   results: [
     {
       id: 782585,
-      title: "Cannellini Bean and Asparagus Salad with Mushrooms",
-      image: "https://spoonacular.com/recipeImages/782585-312x231.jpg",
-      imageType: "jpg",
+      title: 'Cannellini Bean and Asparagus Salad with Mushrooms',
+      image: 'https://spoonacular.com/recipeImages/782585-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 716426,
-      title: "Cauliflower, Brown Rice, and Vegetable Fried Rice",
-      image: "https://spoonacular.com/recipeImages/716426-312x231.jpg",
-      imageType: "jpg",
+      title: 'Cauliflower, Brown Rice, and Vegetable Fried Rice',
+      image: 'https://spoonacular.com/recipeImages/716426-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 715497,
-      title: "Berry Banana Breakfast Smoothie",
-      image: "https://spoonacular.com/recipeImages/715497-312x231.jpg",
-      imageType: "jpg",
+      title: 'Berry Banana Breakfast Smoothie',
+      image: 'https://spoonacular.com/recipeImages/715497-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 715415,
-      title: "Red Lentil Soup with Chicken and Turnips",
-      image: "https://spoonacular.com/recipeImages/715415-312x231.jpg",
-      imageType: "jpg",
+      title: 'Red Lentil Soup with Chicken and Turnips',
+      image: 'https://spoonacular.com/recipeImages/715415-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 716406,
-      title: "Asparagus and Pea Soup: Real Convenience Food",
-      image: "https://spoonacular.com/recipeImages/716406-312x231.jpg",
-      imageType: "jpg",
+      title: 'Asparagus and Pea Soup: Real Convenience Food',
+      image: 'https://spoonacular.com/recipeImages/716406-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 644387,
-      title: "Garlicky Kale",
-      image: "https://spoonacular.com/recipeImages/644387-312x231.jpg",
-      imageType: "jpg",
+      title: 'Garlicky Kale',
+      image: 'https://spoonacular.com/recipeImages/644387-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 715446,
-      title: "Slow Cooker Beef Stew",
-      image: "https://spoonacular.com/recipeImages/715446-312x231.jpg",
-      imageType: "jpg",
+      title: 'Slow Cooker Beef Stew',
+      image: 'https://spoonacular.com/recipeImages/715446-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 782601,
-      title: "Red Kidney Bean Jambalaya",
-      image: "https://spoonacular.com/recipeImages/782601-312x231.jpg",
-      imageType: "jpg",
+      title: 'Red Kidney Bean Jambalaya',
+      image: 'https://spoonacular.com/recipeImages/782601-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 795751,
-      title: "Chicken Fajita Stuffed Bell Pepper",
-      image: "https://spoonacular.com/recipeImages/795751-312x231.jpg",
-      imageType: "jpg",
+      title: 'Chicken Fajita Stuffed Bell Pepper',
+      image: 'https://spoonacular.com/recipeImages/795751-312x231.jpg',
+      imageType: 'jpg',
     },
     {
       id: 766453,
       title: "Hummus and Za'atar",
-      image: "https://spoonacular.com/recipeImages/766453-312x231.jpg",
-      imageType: "jpg",
+      image: 'https://spoonacular.com/recipeImages/766453-312x231.jpg',
+      imageType: 'jpg',
     },
   ],
 };
@@ -66,259 +66,259 @@ const mockRecipesData = {
 const mockIngredientsData = [
   [
     {
-      name: "cannellini beans",
+      name: 'cannellini beans',
       amount: 3.75,
     },
     {
-      name: "curry leaves",
+      name: 'curry leaves',
       amount: 1,
     },
     {
-      name: "tarragon",
+      name: 'tarragon',
       amount: 0.25,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 1,
     },
     {
-      name: "juice of lemon",
+      name: 'juice of lemon',
       amount: 3,
     },
     {
-      name: "lemon zest",
+      name: 'lemon zest',
       amount: 1,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 0.5,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 2,
     },
     {
-      name: "cracked pepper",
+      name: 'cracked pepper',
       amount: 6,
     },
     {
-      name: "sea salt",
+      name: 'sea salt',
       amount: 1,
     },
     {
-      name: "mushrooms",
+      name: 'mushrooms',
       amount: 8,
     },
     {
-      name: "mushrooms",
+      name: 'mushrooms',
       amount: 8,
     },
     {
-      name: "grain mustard",
+      name: 'grain mustard',
       amount: 1,
     },
   ],
   [
     {
-      name: "broccoli",
+      name: 'broccoli',
       amount: 2,
     },
     {
-      name: "cauliflower",
+      name: 'cauliflower',
       amount: 1,
     },
     {
-      name: "t coconut oil",
+      name: 't coconut oil',
       amount: 1,
     },
     {
-      name: "brown rice",
+      name: 'brown rice',
       amount: 3,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 5,
     },
     {
-      name: "t grapeseed oil",
+      name: 't grapeseed oil',
       amount: 1,
     },
     {
-      name: "soy sauce",
+      name: 'soy sauce',
       amount: 3,
     },
     {
-      name: "peas",
+      name: 'peas',
       amount: 1,
     },
     {
-      name: "salt",
+      name: 'salt',
       amount: 8,
     },
     {
-      name: "additional scallion tops",
+      name: 'additional scallion tops',
       amount: 8,
     },
     {
-      name: "scallions",
+      name: 'scallions',
       amount: 7,
     },
     {
-      name: "sesame oil",
+      name: 'sesame oil',
       amount: 2,
     },
     {
-      name: "sesame seeds",
+      name: 'sesame seeds',
       amount: 8,
     },
   ],
   [
     {
-      name: "banana",
+      name: 'banana',
       amount: 0.25,
     },
     {
-      name: "graham cracker crumbs",
+      name: 'graham cracker crumbs',
       amount: 2,
     },
     {
-      name: "soy milk",
+      name: 'soy milk',
       amount: 1,
     },
     {
-      name: "strawberries",
+      name: 'strawberries',
       amount: 0.5,
     },
     {
-      name: "vanilla yogurt",
+      name: 'vanilla yogurt',
       amount: 1,
     },
   ],
   [
     {
-      name: "additional toppings: avocado",
+      name: 'additional toppings: avocado',
       amount: 8,
     },
     {
-      name: "carrots",
+      name: 'carrots',
       amount: 3,
     },
     {
-      name: "celery stalks",
+      name: 'celery stalks',
       amount: 3,
     },
     {
-      name: "chicken breast",
+      name: 'chicken breast',
       amount: 2,
     },
     {
-      name: "flat leaf parsley",
+      name: 'flat leaf parsley',
       amount: 0.5,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 6,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 2,
     },
     {
-      name: "canned tomatoes",
+      name: 'canned tomatoes',
       amount: 28,
     },
     {
-      name: "lentils",
+      name: 'lentils',
       amount: 2,
     },
     {
-      name: "salt and pepper",
+      name: 'salt and pepper',
       amount: 8,
     },
     {
-      name: "turnip",
+      name: 'turnip',
       amount: 1,
     },
     {
-      name: "vegetable stock",
+      name: 'vegetable stock',
       amount: 8,
     },
     {
-      name: "onion",
+      name: 'onion',
       amount: 1,
     },
   ],
   [
     {
-      name: "asparagus",
+      name: 'asparagus',
       amount: 1,
     },
     {
-      name: "evoo",
+      name: 'evoo',
       amount: 1,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 2,
     },
     {
-      name: "onion",
+      name: 'onion',
       amount: 0.5,
     },
     {
-      name: "peas",
+      name: 'peas',
       amount: 2,
     },
     {
-      name: "vegetable broth",
+      name: 'vegetable broth',
       amount: 1,
     },
   ],
   [
     {
-      name: "balsamic vinegar",
+      name: 'balsamic vinegar',
       amount: 3,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 1,
     },
     {
-      name: "curly kale",
+      name: 'curly kale',
       amount: 1,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 2,
     },
   ],
   [
     {
-      name: "beef broth",
+      name: 'beef broth',
       amount: 14.5,
     },
     {
-      name: "carrots",
+      name: 'carrots',
       amount: 2,
     },
     {
-      name: "celery",
+      name: 'celery',
       amount: 2,
     },
     {
-      name: "cream of mushroom soup",
+      name: 'cream of mushroom soup',
       amount: 26,
     },
     {
-      name: "green onions",
+      name: 'green onions',
       amount: 3,
     },
     {
-      name: "new potatoes",
+      name: 'new potatoes',
       amount: 10,
     },
     {
-      name: "onion",
+      name: 'onion',
       amount: 1,
     },
     {
@@ -326,177 +326,177 @@ const mockIngredientsData = [
       amount: 0.5,
     },
     {
-      name: "stew meat",
+      name: 'stew meat',
       amount: 2,
     },
     {
-      name: "water",
+      name: 'water',
       amount: 2,
     },
   ],
   [
     {
-      name: "brown rice",
+      name: 'brown rice',
       amount: 2,
     },
     {
-      name: "carrots",
+      name: 'carrots',
       amount: 2,
     },
     {
-      name: "celery",
+      name: 'celery',
       amount: 2,
     },
     {
-      name: "celery seed",
+      name: 'celery seed',
       amount: 1,
     },
     {
-      name: "kidney beans",
+      name: 'kidney beans',
       amount: 2,
     },
     {
-      name: "marjoram",
+      name: 'marjoram',
       amount: 1,
     },
     {
-      name: "thyme",
+      name: 'thyme',
       amount: 2,
     },
     {
-      name: "eggplant",
+      name: 'eggplant',
       amount: 1,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 2,
     },
     {
-      name: "green beans",
+      name: 'green beans',
       amount: 3,
     },
     {
-      name: "ground pepper",
+      name: 'ground pepper',
       amount: 6,
     },
     {
-      name: "ground sage",
+      name: 'ground sage',
       amount: 2,
     },
     {
-      name: "liquid smoke",
+      name: 'liquid smoke',
       amount: 0.5,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 2,
     },
     {
-      name: "bell pepper",
+      name: 'bell pepper',
       amount: 1,
     },
     {
-      name: "onion",
+      name: 'onion',
       amount: 1,
     },
     {
-      name: "sea salt",
+      name: 'sea salt',
       amount: 1.5,
     },
     {
-      name: "sriracha",
+      name: 'sriracha',
       amount: 1,
     },
     {
-      name: "tomatoes",
+      name: 'tomatoes',
       amount: 2,
     },
     {
-      name: "vegetable stock",
+      name: 'vegetable stock',
       amount: 3,
     },
   ],
   [
     {
-      name: "avocado",
+      name: 'avocado',
       amount: 1,
     },
     {
-      name: "bell peppers",
+      name: 'bell peppers',
       amount: 2,
     },
     {
-      name: "bell peppers",
+      name: 'bell peppers',
       amount: 2,
     },
     {
-      name: "grilled chicken breasts",
+      name: 'grilled chicken breasts',
       amount: 2,
     },
     {
-      name: "chili powder",
+      name: 'chili powder',
       amount: 0.25,
     },
     {
-      name: "cilantro",
+      name: 'cilantro',
       amount: 2,
     },
     {
-      name: "cumin",
+      name: 'cumin',
       amount: 0.25,
     },
     {
-      name: "lettuce",
+      name: 'lettuce',
       amount: 3,
     },
     {
-      name: "already quinoa",
+      name: 'already quinoa',
       amount: 1,
     },
     {
-      name: "salsa",
+      name: 'salsa',
       amount: 3,
     },
     {
-      name: "salt and pepper",
+      name: 'salt and pepper',
       amount: 3,
     },
     {
-      name: "cheese",
+      name: 'cheese',
       amount: 1,
     },
   ],
   [
     {
-      name: "chickpeas",
+      name: 'chickpeas',
       amount: 3,
     },
     {
-      name: "garlic",
+      name: 'garlic',
       amount: 2,
     },
     {
-      name: "juice of lemon",
+      name: 'juice of lemon',
       amount: 3,
     },
     {
-      name: "olive oil",
+      name: 'olive oil',
       amount: 2,
     },
     {
-      name: "paprika",
+      name: 'paprika',
       amount: 4,
     },
     {
-      name: "pine nuts",
+      name: 'pine nuts',
       amount: 2,
     },
     {
-      name: "sea salt",
+      name: 'sea salt',
       amount: 1.5,
     },
     {
-      name: "tahini",
+      name: 'tahini',
       amount: 0.33333334,
     },
     {
