@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import RoutesList from './RoutesList';
 import './App.css';
 import Header from './components/Header';
 import RecipeCard from './components/RecipeCard';
@@ -20,7 +19,7 @@ const dietaryPreferencesList = [
   'Gluten Free',
   'Ketogenic',
   'Dairy Free',
-]; // Example list of dietary preferences
+];
 
 function App() {
   const [recipes, setRecipes] = useState([]);

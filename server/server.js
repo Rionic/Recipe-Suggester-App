@@ -1,14 +1,25 @@
 const express = require('express');
+const bodyParser  = require('body-parser');
 const axios = require('axios');
 const cors = require('cors');
 const mockData = require('./MockData');
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
 app.use(express.json());
+
+app.post('/api/login', (req, res) => {
+  const { firstName, password } = req.body;
+
+  (firstName === 'test' && password === 'password') ?
+    res.status(200).send() :
+    res.status(401).send();
+  
+});
 
 app.post('/api/search', async (req, res) => {
   try {

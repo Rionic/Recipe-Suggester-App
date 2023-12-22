@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import '../App.css';
 import { Typography, TextField, Button } from '@mui/material';
 import { styled } from '@mui/system';
@@ -7,8 +7,29 @@ function Signup() {
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    try {
+      const response = await fetch('http://localhost:3001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({firstName, lastName, email, password}),
+      });
+
+      if (response.ok) {
+        alert('Login successful!')
+      } else {
+        alert('Login failed!')
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   const handlePasswordChange = () => {
