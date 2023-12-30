@@ -2,15 +2,32 @@ const express = require('express');
 const bodyParser  = require('body-parser');
 const axios = require('axios');
 const cors = require('cors');
+const mysql = require('mysql2');
 const mockData = require('./MockData');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
-app.use(express.json());
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'secret',
+  database: 'recipe-suggester',
+});
+
+// Connect to MySQL
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MySQL:', err);
+    return;
+  }
+  console.log('Connected to MySQL database');
+});
 
 app.post('/api/login', (req, res) => {
   const { firstName, password } = req.body;
