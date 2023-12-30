@@ -17,10 +17,9 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'secret',
-  database: 'recipe-suggester',
+  database: 'recipesuggester',
 });
 
-// Connect to MySQL
 connection.connect((err) => {
   if (err) {
     console.error('Error connecting to MySQL:', err);
