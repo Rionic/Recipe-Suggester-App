@@ -6,6 +6,8 @@ import { styled } from '@mui/system';
 function Signup() {
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -13,8 +15,20 @@ function Signup() {
     const lastName = event.target.lastName.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      setPasswordMatch(false);
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+    else {
+      setPasswordMatch(true);
+      setErrorMessage(''); 
+    }
+
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch('http://localhost:3001/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,12 +37,12 @@ function Signup() {
       });
 
       if (response.ok) {
-        alert('Login successful!')
+        alert('Signup successful!')
       } else {
-        alert('Login failed!')
+        alert('Signup failed!')
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during signup:', error);
     }
   };
 
@@ -76,6 +90,8 @@ function Signup() {
           type="password"
           inputRef={confirmPasswordRef}
           onChange={handleConfirmPasswordChange}
+          error={!passwordMatch}
+          helperText={errorMessage}
         />
         <Button
           type="submit"

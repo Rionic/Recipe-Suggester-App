@@ -5,6 +5,7 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const mockData = require('./MockData');
 const app = express();
+const bcrypt = require('bcrypt');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
@@ -12,12 +13,18 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: 'secret',
+  database: 'recipe_suggester',
+});
 
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'secret',
-  database: 'recipesuggester',
+  database: 'recipe_suggester'
 });
 
 connection.connect((err) => {
@@ -28,13 +35,29 @@ connection.connect((err) => {
   console.log('Connected to MySQL database');
 });
 
-app.post('/api/login', (req, res) => {
-  const { firstName, password } = req.body;
+app.post('/api/signup', async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
 
-  (firstName === 'test' && password === 'password') ?
-    res.status(200).send() :
-    res.status(401).send();
-  
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    pool.query(
+      'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)',
+      [firstName, lastName, email, hashedPassword],
+      (error, results) => {
+        if (error) {
+          console.error('Error inserting user:', error);
+          res.status(500).json({ error: 'Error signing up' });
+        } else {
+          console.log('User signed up successfully');
+          res.status(200).json({ message: 'Signup successful' });
+        }
+      }
+    );
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ error: 'Error signing up' });
+  }
 });
 
 app.post('/api/search', async (req, res) => {
