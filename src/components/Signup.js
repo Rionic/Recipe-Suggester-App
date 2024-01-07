@@ -7,7 +7,9 @@ function Signup() {
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const [passwordMatch, setPasswordMatch] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,16 +19,27 @@ function Signup() {
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
 
+    const validateEmail = (email) => {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    };
+
     if (password !== confirmPassword) {
       setPasswordMatch(false);
-      setErrorMessage('Passwords do not match');
-      return;
-    }
-    else {
+      setPasswordErrorMessage('Passwords do not match');
+    } else {
       setPasswordMatch(true);
-      setErrorMessage(''); 
+      setPasswordErrorMessage(''); 
     }
-
+    if (!validateEmail(email)) {
+      setIsValidEmail(false);
+      setEmailErrorMessage('Invalid email format');
+    } else {
+      setIsValidEmail(true);
+      setEmailErrorMessage('');
+    }
+    console.log(emailErrorMessage);
+    if (passwordErrorMessage || emailErrorMessage) return;
     try {
       const response = await fetch('http://localhost:3001/api/signup', {
         method: 'POST',
@@ -72,7 +85,14 @@ function Signup() {
           variant="outlined"
           required
         />
-        <TextField label="Email" name="email" variant="outlined" required />
+        <TextField 
+          label="Email"
+          name="email"
+          variant="outlined"
+          required
+          error={!isValidEmail}
+          helperText={emailErrorMessage}
+        />
         <TextField
           label="Password"
           name="password"
@@ -91,7 +111,7 @@ function Signup() {
           inputRef={confirmPasswordRef}
           onChange={handleConfirmPasswordChange}
           error={!passwordMatch}
-          helperText={errorMessage}
+          helperText={passwordErrorMessage}
         />
         <Button
           type="submit"
