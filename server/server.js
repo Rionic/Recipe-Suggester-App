@@ -6,6 +6,7 @@ const mysql = require('mysql2');
 const mockData = require('./MockData');
 const app = express();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
@@ -33,6 +34,40 @@ connection.connect((err) => {
     return;
   }
   console.log('Connected to MySQL database');
+});
+
+app.post('/api/login', async (req, res) => {
+
+  const { email, password } = req.body;
+  try {
+    pool.query(
+      'SELECT password FROM users WHERE email = ?',
+      [email],
+      async (error, results) => {
+        if (error) {
+          console.error('Error retrieving user:', error);
+          res.status(500).json({ error: 'Error during login' });
+        } else {
+          if (results.length === 0) {
+            res.status(401).json({ error: 'Invalid credentials' });
+          } else {
+            const hashedPassword = results[0].password;
+            const passwordMatch = await bcrypt.compare(password, hashedPassword);
+            if (passwordMatch) {
+              // const token = jwt.sign({ email }, 'your_secret_key_here', { expiresIn: '1h'});
+              res.status(200).json({ message: 'Login successful', token });
+            } else {
+              res.status(401).json({ error: 'Invalid credentials' });
+            }
+          }
+        }
+      }
+    );
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Error during login' });
+  }
+
 });
 
 app.post('/api/signup', async (req, res) => {

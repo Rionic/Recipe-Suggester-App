@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../App.css';
 import { Typography, TextField, Button } from '@mui/material';
-import { styled } from '@mui/system';
+import Header from './Header.js';
 
 function Signup() {
   const passwordRef = useRef(null);
@@ -38,7 +38,6 @@ function Signup() {
       setIsValidEmail(true);
       setEmailErrorMessage('');
     }
-    console.log(emailErrorMessage);
     if (passwordErrorMessage || emailErrorMessage) return;
     try {
       const response = await fetch('http://localhost:3001/api/signup', {
@@ -59,18 +58,19 @@ function Signup() {
     }
   };
 
-  const handlePasswordChange = () => {
-    confirmPasswordRef.current?.blur();
+  const handlePasswordBlur = () => {
+    passwordRef.current?.blur();
   };
   
-  const handleConfirmPasswordChange = () => {
-    passwordRef.current?.blur();
+  const handleConfirmPasswordBlur = () => {
+    confirmPasswordRef.current?.blur();
   };
 
   return (
     <div>
+      <Header />
       <Typography variant="h4" align="center" gutterBottom>
-        Signup
+        Sign up
       </Typography>
       <form onSubmit={handleSubmit} className="signup">
         <TextField
@@ -100,7 +100,7 @@ function Signup() {
           required
           type="password"
           inputRef={passwordRef}
-          onChange={handlePasswordChange}
+          onBlur={handlePasswordBlur}
         />
         <TextField
           label="Confirm Password"
@@ -109,7 +109,7 @@ function Signup() {
           required
           type="password"
           inputRef={confirmPasswordRef}
-          onChange={handleConfirmPasswordChange}
+          onBlur={handleConfirmPasswordBlur}
           error={!passwordMatch}
           helperText={passwordErrorMessage}
         />

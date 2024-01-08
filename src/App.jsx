@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
+import LoginSignup from './components/LoginSignup';
 import RecipeCard from './components/RecipeCard';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
@@ -100,6 +101,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
+        <LoginSignup />
         <main>
           <form onSubmit={handleSubmit}>
             <div className="filters">
