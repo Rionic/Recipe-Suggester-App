@@ -50,6 +50,8 @@ function Signup() {
 
       if (response.ok) {
         alert('Signup successful!')
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
       } else {
         alert('Signup failed!')
       }

@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser  = require('body-parser');
 const axios = require('axios');
 const cors = require('cors');
 const mysql = require('mysql2');
@@ -7,8 +6,10 @@ const mockData = require('./MockData');
 const app = express();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const AuthenticateJWT = require('./AuthenticateJWT');
+const { JWT_SECRET } = require('./config');
+
 app.use(cors());
-app.use(bodyParser.json());
 app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
@@ -54,8 +55,8 @@ app.post('/api/login', async (req, res) => {
             const hashedPassword = results[0].password;
             const passwordMatch = await bcrypt.compare(password, hashedPassword);
             if (passwordMatch) {
-              // const token = jwt.sign({ email }, 'your_secret_key_here', { expiresIn: '1h'});
-              res.status(200).json({ message: 'Login successful', token });
+              const token = jwt.sign({ email }, JWT_SECRET , { expiresIn: '1d'});
+              res.json({ token });
             } else {
               res.status(401).json({ error: 'Invalid credentials' });
             }
@@ -85,7 +86,8 @@ app.post('/api/signup', async (req, res) => {
           res.status(500).json({ error: 'Error signing up' });
         } else {
           console.log('User signed up successfully');
-          res.status(200).json({ message: 'Signup successful' });
+          const token = jwt.sign({ email }, JWT_SECRET , { expiresIn: '1d'});
+          res.json({ token });
         }
       }
     );

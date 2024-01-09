@@ -38,6 +38,8 @@ function Login() {
 
       if (response.ok) {
         alert('Login successful!')
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
       } else {
         alert('Login failed!')
       }
