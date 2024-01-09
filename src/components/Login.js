@@ -1,18 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import Header from './Header.js';
 import { Typography, TextField, Button } from '@mui/material';
+import { AuthContext } from '../AuthContext.js';
+import { useNavigate  } from 'react-router-dom';
 
 function Login() {
 
   const passwordRef = useRef(null);
+  const navigate = useNavigate();
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const { handleLogin } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
 
+    // same code as signup. consider modularizing
     const validateEmail = (email) => {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return regex.test(email);
@@ -37,9 +42,9 @@ function Login() {
       });
 
       if (response.ok) {
-        alert('Login successful!')
         const data = await response.json();
-        localStorage.setItem('token', data.token);
+        handleLogin(data.token);
+        navigate('/')
       } else {
         alert('Login failed!')
       }

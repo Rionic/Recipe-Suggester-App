@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import '../App.css';
 import { Typography, TextField, Button } from '@mui/material';
 import Header from './Header.js';
+import { AuthContext } from '../AuthContext.js';
 
 function Signup() {
   const passwordRef = useRef(null);
@@ -10,6 +11,7 @@ function Signup() {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const { handleLogin } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,7 +53,7 @@ function Signup() {
       if (response.ok) {
         alert('Signup successful!')
         const data = await response.json();
-        localStorage.setItem('token', data.token);
+        handleLogin(data.token);
       } else {
         alert('Signup failed!')
       }

@@ -7,7 +7,7 @@ const app = express();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const AuthenticateJWT = require('./AuthenticateJWT');
-const { JWT_SECRET } = require('./config');
+const { JWT_SECRET } = require('./Config');
 
 app.use(cors());
 app.use(express.json());

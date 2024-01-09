@@ -4,14 +4,16 @@ import './index.css';
 import RoutesList from './RoutesList';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
-    <React.StrictMode>
-      <RoutesList />
-    </React.StrictMode>
-    ,
+    <AuthProvider>
+      <React.StrictMode>
+        <RoutesList />
+      </React.StrictMode>
+    </AuthProvider>
   </Router>,
 );
 

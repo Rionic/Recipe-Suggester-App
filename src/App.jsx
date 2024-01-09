@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
 import Header from './components/Header';
 import LoginSignup from './components/LoginSignup';
 import RecipeCard from './components/RecipeCard';
+import MyAccount from './components/MyAccount.js';
+import { AuthContext } from './AuthContext.js';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   TextField,
@@ -32,7 +34,7 @@ function App() {
     dietaryPreferences: [],
     recipeName: '',
   });
-
+  const { token } = useContext(AuthContext);
   useEffect(() => {
     if (ids.length > 0) fetchIngredients(ids);
   }, [ids]);
@@ -101,7 +103,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        <LoginSignup />
+        {token ? <MyAccount /> : <LoginSignup />}
         <main>
           <form onSubmit={handleSubmit}>
             <div className="filters">
