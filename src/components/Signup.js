@@ -51,7 +51,6 @@ function Signup() {
       });
 
       if (response.ok) {
-        alert('Signup successful!')
         const data = await response.json();
         handleLogin(data.token);
       } else {

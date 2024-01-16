@@ -1,14 +1,14 @@
 import '../App.css';
 import React from 'react';
-import { Typography, Link as MuiLink } from '@mui/material';
+import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function Header() {
   return (
     <div className="header">
-      <MuiLink component={Link} to="/" underline="none">
+      <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
         <Typography variant="h3">Recipe Finder</Typography>
-      </MuiLink>
+      </Link>
     </div>
   );
 }

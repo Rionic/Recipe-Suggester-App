@@ -1,20 +1,25 @@
-import React , { useState } from 'react';
+import React , { useContext } from 'react';
 import { Dropdown } from '@mui/base/Dropdown';
 import { Menu } from '@mui/base/Menu';
 import { MenuButton as BaseMenuButton } from '@mui/base/MenuButton';
 import { MenuItem as BaseMenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
+import { AuthContext } from '../AuthContext.js';
+import { Link } from 'react-router-dom';
 
 function MyAccount() {
+const { handleLogout } = useContext(AuthContext);
 
   return (
     <div style={{ position: 'absolute', right: '20px', top: '10px' }}>
       <Dropdown>
         <MenuButton>My Account</MenuButton>
         <Menu slots={{ listbox: Listbox }}>
-          <MenuItem>Profile</MenuItem>
+          <Link to='/profile' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+            <MenuItem>Profile</MenuItem>
+          </Link>
           <MenuItem>Saved Recipes</MenuItem>
-          <MenuItem>Log out</MenuItem>
+          <MenuItem onClick={handleLogout}>Log out</MenuItem>
         </Menu>
       </Dropdown>
     </div>
