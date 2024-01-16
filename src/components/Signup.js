@@ -31,7 +31,7 @@ function Signup() {
       setPasswordErrorMessage('Passwords do not match');
     } else {
       setPasswordMatch(true);
-      setPasswordErrorMessage(''); 
+      setPasswordErrorMessage('');
     }
     if (!validateEmail(email)) {
       setIsValidEmail(false);
@@ -47,14 +47,14 @@ function Signup() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({firstName, lastName, email, password}),
+        body: JSON.stringify({ firstName, lastName, email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         handleLogin(data.token);
       } else {
-        alert('Signup failed!')
+        alert('Signup failed!');
       }
     } catch (error) {
       console.error('Error during signup:', error);
@@ -64,7 +64,7 @@ function Signup() {
   const handlePasswordBlur = () => {
     passwordRef.current?.blur();
   };
-  
+
   const handleConfirmPasswordBlur = () => {
     confirmPasswordRef.current?.blur();
   };
@@ -88,7 +88,7 @@ function Signup() {
           variant="outlined"
           required
         />
-        <TextField 
+        <TextField
           label="Email"
           name="email"
           variant="outlined"
@@ -116,11 +116,7 @@ function Signup() {
           error={!passwordMatch}
           helperText={passwordErrorMessage}
         />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <Button type="submit" variant="contained" color="primary">
           Sign Up
         </Button>
       </form>

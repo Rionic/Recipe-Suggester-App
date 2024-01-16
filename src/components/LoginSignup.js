@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function LoginSignup() {
   return (
-    <div style={{position: 'absolute', right: '0px', top: '10px'}}>
+    <div style={{ position: 'absolute', right: '0px', top: '10px' }}>
       <Link to="/login">
         <Button style={{ marginRight: '10px' }} variant="contained">
           Log in

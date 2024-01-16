@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null);
+  const [token, setToken] = useState(
+    () => localStorage.getItem('token') || null,
+  );
 
   const handleLogin = (newToken) => {
     setToken(newToken);
@@ -17,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     localStorage.removeItem('token');
     // navigate('/');
-  }
+  };
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');

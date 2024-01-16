@@ -1,4 +1,4 @@
-import React , { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Dropdown } from '@mui/base/Dropdown';
 import { Menu } from '@mui/base/Menu';
 import { MenuButton as BaseMenuButton } from '@mui/base/MenuButton';
@@ -8,23 +8,30 @@ import { AuthContext } from '../AuthContext.js';
 import { Link } from 'react-router-dom';
 
 function MyAccount() {
-const { handleLogout } = useContext(AuthContext);
+  const { handleLogout } = useContext(AuthContext);
 
   return (
     <div style={{ position: 'absolute', right: '20px', top: '10px' }}>
       <Dropdown>
         <MenuButton>My Account</MenuButton>
         <Menu slots={{ listbox: Listbox }}>
-          <Link to='/profile' style={{ color: 'inherit', textDecoration: 'inherit'}}>
+          <Link
+            to="/profile"
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
             <MenuItem>Profile</MenuItem>
           </Link>
-          <MenuItem>Saved Recipes</MenuItem>
+          <Link
+            to="/saved-recipes"
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
+          >
+            <MenuItem>Saved Recipes</MenuItem>
+          </Link>
           <MenuItem onClick={handleLogout}>Log out</MenuItem>
         </Menu>
       </Dropdown>
     </div>
-  )
-
+  );
 }
 
 // from mui docs
@@ -69,7 +76,8 @@ const Listbox = styled('ul')(
     background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
     border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
     color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-    box-shadow: 0px 4px 6px ${theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.50)' : 'rgba(0,0,0, 0.05)'
+    box-shadow: 0px 4px 6px ${
+      theme.palette.mode === 'dark' ? 'rgba(0,0,0, 0.50)' : 'rgba(0,0,0, 0.05)'
     };
     z-index: 1;
     `,
@@ -88,8 +96,12 @@ const MenuItem = styled(BaseMenuItem)(
     }
   
     &.${menuItemClasses.focusVisible} {
-      outline: 3px solid ${theme.palette.mode === 'dark' ? blue[600] : blue[200]};
-      background-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[100]};
+      outline: 3px solid ${
+        theme.palette.mode === 'dark' ? blue[600] : blue[200]
+      };
+      background-color: ${
+        theme.palette.mode === 'dark' ? grey[800] : grey[100]
+      };
       color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
     }
   
@@ -130,7 +142,9 @@ const MenuButton = styled(BaseMenuButton)(
     }
   
     &:focus-visible {
-      box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
+      box-shadow: 0 0 0 4px ${
+        theme.palette.mode === 'dark' ? blue[300] : blue[200]
+      };
       outline: none;
     }
     `,

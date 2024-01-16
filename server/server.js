@@ -1,16 +1,16 @@
-const express = require('express');
-const axios = require('axios');
 const cors = require('cors');
-const mysql = require('mysql2');
-const mockData = require('./MockData');
+const express = require('express');
 const app = express();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const AuthenticateJWT = require('./AuthenticateJWT');
-const { JWT_SECRET } = require('./Config');
-
 app.use(cors());
 app.use(express.json());
+const axios = require('axios');
+const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const mockData = require('./MockData');
+const AuthenticateJWT = require('./AuthenticateJWT');
+const { JWT_SECRET } = require('./Config');
 
 const PORT = process.env.PORT || 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
@@ -22,23 +22,33 @@ const pool = mysql.createPool({
   database: 'recipe_suggester',
 });
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'secret',
-  database: 'recipe_suggester'
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL:', err);
-    return;
+app.get('/api/fetch-name', AuthenticateJWT, async (req, res) => {
+  const userEmail = req.user.email;
+  try {
+    pool.query(
+      'SELECT first_name FROM users WHERE email = ?',
+      [userEmail],
+      (error, results) => {
+        if (error) {
+          console.error('Error retrieving user:', error);
+          res.status(500).json({ error: 'Error fetching user data' });
+        } else {
+          if (results.length > 0) {
+            const firstName = results[0].first_name;
+            res.json({ firstName });
+          } else {
+            res.status(404).json({ error: 'User not found' });
+          }
+        }
+      },
+    );
+  } catch (error) {
+    console.error('Error fetching name');
+    res.status(500).json({ error: 'Internal server error' });
   }
-  console.log('Connected to MySQL database');
 });
 
 app.post('/api/login', async (req, res) => {
-
   const { email, password } = req.body;
   try {
     pool.query(
@@ -53,22 +63,27 @@ app.post('/api/login', async (req, res) => {
             res.status(401).json({ error: 'Invalid credentials' });
           } else {
             const hashedPassword = results[0].password;
-            const passwordMatch = await bcrypt.compare(password, hashedPassword);
+            const passwordMatch = await bcrypt.compare(
+              password,
+              hashedPassword,
+            );
             if (passwordMatch) {
-              const token = jwt.sign({ email }, JWT_SECRET , { expiresIn: '1d'});
+              console.log('secret', JWT_SECRET);
+              const token = jwt.sign({ email }, JWT_SECRET, {
+                expiresIn: '1d',
+              });
               res.json({ token });
             } else {
               res.status(401).json({ error: 'Invalid credentials' });
             }
           }
         }
-      }
+      },
     );
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Error during login' });
   }
-
 });
 
 app.post('/api/signup', async (req, res) => {
@@ -86,10 +101,10 @@ app.post('/api/signup', async (req, res) => {
           res.status(500).json({ error: 'Error signing up' });
         } else {
           console.log('User signed up successfully');
-          const token = jwt.sign({ email }, JWT_SECRET , { expiresIn: '1d'});
+          const token = jwt.sign({}, JWT_SECRET, { expiresIn: '1d' });
           res.json({ token });
         }
-      }
+      },
     );
   } catch (error) {
     console.error('Error during signup:', error);

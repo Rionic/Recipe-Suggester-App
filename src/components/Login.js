@@ -4,7 +4,6 @@ import { Typography, TextField, Button } from '@mui/material';
 import { AuthContext } from '../AuthContext.js';
 
 function Login() {
-
   const passwordRef = useRef(null);
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
@@ -36,19 +35,18 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({email, password}),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         handleLogin(data.token);
       } else {
-        alert('Login failed!')
+        alert('Login failed!');
       }
     } catch (error) {
       console.error('Error during login:', error);
     }
-
   };
 
   const handlePasswordBlur = () => {
@@ -62,7 +60,7 @@ function Login() {
         Login
       </Typography>
       <form onSubmit={handleSubmit} className="signup">
-        <TextField 
+        <TextField
           label="Email"
           name="email"
           variant="outlined"
@@ -79,16 +77,12 @@ function Login() {
           inputRef={passwordRef}
           onBlur={handlePasswordBlur}
         />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
+        <Button type="submit" variant="contained" color="primary">
           Login
         </Button>
       </form>
     </div>
-  )
+  );
 }
 
 export default Login;
