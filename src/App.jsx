@@ -152,6 +152,7 @@ function App() {
             {recipes.map((recipe, index) => (
               <RecipeCard
                 key={recipe.id}
+                id={recipe.id}
                 title={recipe.title}
                 imageUrl={recipe.image}
                 ingredients={ingredients[index]}

@@ -9,12 +9,16 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+
 
 function RecipeCard(props) {
   const [expanded, setExpanded] = useState(false);
   const handleExpansion = () => {
     setExpanded(!expanded);
   };
+  console.log(props)
   return (
     <Card className={`card-media ${expanded ? 'expanded-card' : ''}`}>
       <a href={props.sourceUrl} target="_blank" rel="noopener noreferrer">
@@ -40,6 +44,9 @@ function RecipeCard(props) {
       >
         {props.title}
       </Typography>
+      <IconButton aria-label="save recipe">
+          <FavoriteIcon />
+      </IconButton>
       <Accordion
         className="ingredients-accordion"
         expanded={expanded}
