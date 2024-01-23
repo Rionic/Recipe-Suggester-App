@@ -1,30 +1,21 @@
 import React, { useContext, useState } from 'react';
 import Header from './Header';
+import FetchInfo from '../utils/FetchInfo.js';
 import { AuthContext } from '../AuthContext.js';
 
 function Profile() {
-  const [firstName, setFirstName] = useState('');
   const { token } = useContext(AuthContext);
+  const [firstName, setFirstName] = useState('');
 
-  const fetchName = async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/fetch-name', {
-        method: 'GET',
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setFirstName(data.firstName);
-      } else {
-        alert('Info fetching failed!');
-      }
+      const data = await FetchInfo(token);
+      setFirstName(data.userInfo.first_name);
     } catch (error) {
-      console.error('Error fetching name:', error);
+      console.error('Error fetching data:', error);
     }
   };
-  fetchName();
+  fetchData();
   return (
     <div>
       <Header />

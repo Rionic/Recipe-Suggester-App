@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css';
 import {
   Card,
@@ -11,14 +11,53 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-
+import FetchInfo from '../utils/FetchInfo.js';
+import { AuthContext } from '../AuthContext.js';
 
 function RecipeCard(props) {
+  const [id, setId] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const { token } = useContext(AuthContext);
   const handleExpansion = () => {
     setExpanded(!expanded);
   };
-  console.log(props)
+
+  const fetchData = async () => {
+    try {
+      const data = await FetchInfo(token);
+      setId(data.userInfo.id);
+      handleSaveRecipe();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleSaveRecipe = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/save-recipe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          user_id: id,
+          recipe_id: props.id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log('Recipe saved successfully');
+      } else {
+        console.error('Failed to save recipe:', data.message);
+      }
+    } catch (error) {
+      console.error('Error saving recipe:', error);
+    }
+  };
+
   return (
     <Card className={`card-media ${expanded ? 'expanded-card' : ''}`}>
       <a href={props.sourceUrl} target="_blank" rel="noopener noreferrer">
@@ -44,8 +83,8 @@ function RecipeCard(props) {
       >
         {props.title}
       </Typography>
-      <IconButton aria-label="save recipe">
-          <FavoriteIcon />
+      <IconButton aria-label="save recipe" onClick={fetchData}>
+        <FavoriteIcon />
       </IconButton>
       <Accordion
         className="ingredients-accordion"

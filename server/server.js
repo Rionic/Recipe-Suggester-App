@@ -22,11 +22,15 @@ const pool = mysql.createPool({
   database: 'recipe_suggester',
 });
 
-app.get('/api/fetch-name', AuthenticateJWT, async (req, res) => {
+app.post('/api/save-recipe', AuthenticateJWT, async (req, res) => {
+  console.log(req.body);
+});
+
+app.get('/api/fetch-user-info', AuthenticateJWT, async (req, res) => {
   const userEmail = req.user.email;
   try {
     pool.query(
-      'SELECT first_name FROM users WHERE email = ?',
+      'SELECT id, first_name, last_name FROM users WHERE email = ?',
       [userEmail],
       (error, results) => {
         if (error) {
@@ -34,8 +38,8 @@ app.get('/api/fetch-name', AuthenticateJWT, async (req, res) => {
           res.status(500).json({ error: 'Error fetching user data' });
         } else {
           if (results.length > 0) {
-            const firstName = results[0].first_name;
-            res.json({ firstName });
+            const userInfo = results[0];
+            res.json({ userInfo });
           } else {
             res.status(404).json({ error: 'User not found' });
           }
@@ -43,7 +47,7 @@ app.get('/api/fetch-name', AuthenticateJWT, async (req, res) => {
       },
     );
   } catch (error) {
-    console.error('Error fetching name');
+    console.error('Error fetching user info');
     res.status(500).json({ error: 'Internal server error' });
   }
 });
