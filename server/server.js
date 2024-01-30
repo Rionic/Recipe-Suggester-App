@@ -22,8 +22,46 @@ const pool = mysql.createPool({
   database: 'recipe_suggester',
 });
 
+app.post('/api/unsave-recipe', AuthenticateJWT, async (req, res) => {
+  console.log(req.body);
+  const { user_id, recipe_id} = req.body;
+  try {
+    pool.query('DELETE FROM user_recipes WHERE user_id = ? AND recipe_id = ?',
+    [user_id, recipe_id],
+    (error) => {
+      if (error) {
+        console.error('Error unsaving recipe:', error);
+        res.status(500).json({ error: 'Error unsaving recipe' });
+      } else {
+        console.log('Recipe unsaved successfully');
+        res.status(200).json({ message: 'Recipe unsaved successfully'})
+      }
+    })
+  } catch (error) {
+    console.error('Error unsaving recipe:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 app.post('/api/save-recipe', AuthenticateJWT, async (req, res) => {
   console.log(req.body);
+  const { user_id, recipe_id} = req.body;
+  try {
+    pool.query('INSERT INTO user_recipes (user_id, recipe_id) VALUES (?, ?)',
+    [user_id, recipe_id],
+    (error) => {
+      if (error) {
+        console.error('Error saving recipe:', error);
+        res.status(500).json({ error: 'Error saving recipe' });
+      } else {
+        console.log('Recipe saved successfully');
+        res.status(200).json({ message: 'Recipe saved successfully'})
+      }
+    })
+  } catch (error) {
+    console.error('Error saving recipe:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.get('/api/fetch-user-info', AuthenticateJWT, async (req, res) => {
