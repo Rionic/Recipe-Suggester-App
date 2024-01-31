@@ -22,8 +22,59 @@ const pool = mysql.createPool({
   database: 'recipe_suggester',
 });
 
-app.post('/api/unsave-recipe', AuthenticateJWT, async (req, res) => {
+pool.query(`
+  CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
+  );
+`, (error) => {
+  if (error) console.error('Error setting up users table:', error);
+  else console.log('users table setup successful');
+});
+
+pool.query(`
+  CREATE TABLE IF NOT EXISTS user_recipes (
+    user_recipe_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    recipe_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  );
+`, (error) => {
+  if (error) console.error('Error setting up user_recipes table:', error);
+  else console.log('user_recipes table setup successful');
+});
+
+app.get('/api/fetch-saved-recipes', AuthenticateJWT, async (req, res) => {
   console.log(req.body);
+  const { email } = req.user;
+  try {
+    pool.query('SELECT recipe_id FROM user_recipes WHERE user_id = (SELECT id FROM users WHERE email = ?)',
+    [email],
+    (error, results) => {
+      if (error) {
+        console.error('Error fetching saved recipes');
+        res.status(500).json({ error: 'Error fetching saved recipes'});
+      }
+      else {
+        if (results && results.length > 0) {
+          console.log(results);
+          const savedRecipeIds = results;
+          res.json({ savedRecipeIds });
+        } else {
+          res.status(404).json({ error: 'No saved recipes found' });
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error');
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/api/unsave-recipe', AuthenticateJWT, async (req, res) => {
   const { user_id, recipe_id} = req.body;
   try {
     pool.query('DELETE FROM user_recipes WHERE user_id = ? AND recipe_id = ?',

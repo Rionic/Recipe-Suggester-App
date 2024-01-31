@@ -1,103 +1,32 @@
-import React, { useState, useEffect, useContext } from 'react';
-import './App.css';
+import React from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import Header from './components/Header';
 import LoginSignup from './components/LoginSignup';
 import RecipeCard from './components/RecipeCard';
-import MyAccount from './components/MyAccount.js';
+import MyAccount from './components/MyAccount.js';      
+import UseRecipeSearch from './utils/UseRecipeSearch.js';
 import { AuthContext } from './AuthContext.js';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {
-  TextField,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from '@mui/material';
 
 const theme = createTheme();
-const dietaryPreferencesList = [
-  'Vegetarian',
-  'Vegan',
-  'Gluten Free',
-  'Ketogenic',
-  'Dairy Free',
-];
+const dietaryPreferencesList = ['Vegetarian', 'Vegan', 'Gluten Free', 'Ketogenic', 'Dairy Free'];
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  const [ids, setIds] = useState([]);
-  const [ingredients, setIngredients] = useState([]);
-  const [urls, setUrls] = useState([]);
-  const [searchCriteria, setSearchCriteria] = useState({
+  const { token } = React.useContext(AuthContext);
+  const {
+    recipes,
+    ids,
+    ingredients,
+    urls,
+    searchCriteria,
+    handleInputChange,
+    handlePreferenceChange,
+    handleSubmit,
+  } = UseRecipeSearch({
     ingredients: '',
     dietaryPreferences: [],
     recipeName: '',
   });
-  const { token } = useContext(AuthContext);
-  useEffect(() => {
-    if (ids.length > 0) fetchIngredients(ids);
-  }, [ids]);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setSearchCriteria({ ...searchCriteria, [name]: value });
-  };
-
-  const handlePreferenceChange = (event) => {
-    const value = event.target.value;
-    setSearchCriteria({
-      ...searchCriteria,
-      dietaryPreferences: value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const fetchedRecipes = await fetchRecipes();
-    const recipeIds = fetchedRecipes.map((recipe) => recipe.id);
-    setIds(recipeIds);
-  };
-
-  const fetchRecipes = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(searchCriteria),
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      setRecipes(data.results);
-      return data.results;
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-      return [];
-    }
-  };
-
-  const fetchIngredients = async (recipeIds) => {
-    try {
-      const joinedIds = recipeIds.join(',');
-      const response = await fetch(
-        `http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`,
-      );
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-
-      setIngredients(data.ingredientsList);
-      setUrls(data.urlList);
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
-    }
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -122,9 +51,7 @@ function App() {
                 onChange={handleInputChange}
               />
               <FormControl variant="outlined">
-                <InputLabel id="dietary-preferences-label">
-                  Dietary Preferences
-                </InputLabel>
+                <InputLabel id="dietary-preferences-label">Dietary Preferences</InputLabel>
                 <Select
                   labelId="dietary-preferences-label"
                   id="dietary-preferences"
@@ -147,7 +74,6 @@ function App() {
               Search Recipes
             </Button>
           </form>
-          {/* <RecipeList /> */}
           <div className="card-list">
             {recipes.map((recipe, index) => (
               <RecipeCard

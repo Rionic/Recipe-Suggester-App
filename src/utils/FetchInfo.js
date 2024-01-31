@@ -9,14 +9,14 @@ async function FetchInfo(token) {
 
     if (response.ok) {
       const data = await response.json();
-      return data; // Resolve the promise with the actual value
+      return data;
     } else {
       alert('Info fetching failed!');
       throw new Error('Info fetching failed');
     }
   } catch (error) {
     console.error('Error fetching name:', error);
-    throw error; // Reject the promise with the caught error
+    throw error;
   }
 }
 
