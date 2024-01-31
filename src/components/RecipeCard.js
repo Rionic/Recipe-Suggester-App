@@ -29,6 +29,7 @@ function RecipeCard(props) {
   }, []);
 
   const fetchData = async (buttonClicked) => {
+    if (!token) return;
     try {
       const data = await FetchInfo(token);
       console.log(data);
@@ -97,9 +98,11 @@ function RecipeCard(props) {
       >
         {props.title}
       </Typography>
+      {token &&
       <IconButton aria-label="save recipe" onClick={()=>{fetchData(true)}}>
         <FavoriteIcon color={isSaved ? 'error' : 'inherit'} />
       </IconButton>
+      }
       <Accordion
         className="ingredients-accordion"
         expanded={expanded}
