@@ -7,7 +7,7 @@ function SavedRecipes() {
   const { token } = useContext(AuthContext);
   const [savedRecipeIds, setSavedRecipeIds] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
-  
+
   useEffect(() => {
     if (savedRecipeIds.length > 0) {
       fetchRecipeDetails();
@@ -17,12 +17,15 @@ function SavedRecipes() {
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/fetch-saved-recipes', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          'http://localhost:3001/api/fetch-saved-recipes',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -44,7 +47,9 @@ function SavedRecipes() {
     const savedIds = savedRecipeIds.map((recipe) => recipe.recipe_id);
     const joinedIds = savedIds.join(',');
     try {
-      const response = await fetch(`http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`);
+      const response = await fetch(
+        `http://localhost:3001/api/recipe/ingredients?recipeIds=${joinedIds}`,
+      );
       if (response.ok) {
         const data = await response.json();
         const updatedSavedRecipes = savedRecipeIds.map((recipe, index) => {
@@ -58,14 +63,15 @@ function SavedRecipes() {
         });
         setSavedRecipes(updatedSavedRecipes);
       } else {
-        alert('Server error. This is likely due the 150 requests/day limit being hit on the Spoonacular API');
+        alert(
+          'Server error. This is likely due the 150 requests/day limit being hit on the Spoonacular API',
+        );
         console.error('Failed to fetch recipe details');
       }
     } catch (error) {
       console.error('Error fetching recipe details:', error);
     }
   };
-
 
   return (
     <div>

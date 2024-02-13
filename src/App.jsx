@@ -1,15 +1,28 @@
 import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { TextField, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from '@mui/material';
 import Header from './components/Header';
 import LoginSignup from './components/LoginSignup';
 import RecipeCard from './components/RecipeCard';
-import MyAccount from './components/MyAccount.js';      
+import MyAccount from './components/MyAccount.js';
 import UseRecipeSearch from './utils/UseRecipeSearch.js';
 import { AuthContext } from './AuthContext.js';
 
 const theme = createTheme();
-const dietaryPreferencesList = ['Vegetarian', 'Vegan', 'Gluten Free', 'Ketogenic', 'Dairy Free'];
+const dietaryPreferencesList = [
+  'Vegetarian',
+  'Vegan',
+  'Gluten Free',
+  'Ketogenic',
+  'Dairy Free',
+];
 
 function App() {
   const { token } = React.useContext(AuthContext);
@@ -51,7 +64,9 @@ function App() {
                 onChange={handleInputChange}
               />
               <FormControl variant="outlined">
-                <InputLabel id="dietary-preferences-label">Dietary Preferences</InputLabel>
+                <InputLabel id="dietary-preferences-label">
+                  Dietary Preferences
+                </InputLabel>
                 <Select
                   labelId="dietary-preferences-label"
                   id="dietary-preferences"

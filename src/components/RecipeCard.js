@@ -17,7 +17,9 @@ import { AuthContext } from '../AuthContext.js';
 function RecipeCard(props) {
   const [id, setId] = useState('');
   const [expanded, setExpanded] = useState(false);
-  const [isSaved, setIsSaved] = useState(localStorage.getItem(`recipe_${props.id}_user_${id}`) === 'true');
+  const [isSaved, setIsSaved] = useState(
+    localStorage.getItem(`recipe_${props.id}_user_${id}`) === 'true',
+  );
   const { token } = useContext(AuthContext);
 
   const handleExpansion = () => {
@@ -29,7 +31,9 @@ function RecipeCard(props) {
   }, []);
 
   useEffect(() => {
-    setIsSaved(localStorage.getItem(`recipe_${props.id}_user_${id}`) === 'true');
+    setIsSaved(
+      localStorage.getItem(`recipe_${props.id}_user_${id}`) === 'true',
+    );
   }, [id]);
 
   const fetchData = async (buttonClicked) => {
@@ -48,17 +52,20 @@ function RecipeCard(props) {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:3001/api/${isSaved ? 'un' : ''}save-recipe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `http://localhost:3001/api/${isSaved ? 'un' : ''}save-recipe`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user_id: id,
+            recipe_id: props.id,
+          }),
         },
-        body: JSON.stringify({
-          user_id: id,
-          recipe_id: props.id,
-        }),
-      });
+      );
 
       const data = await response.json();
 
@@ -66,7 +73,10 @@ function RecipeCard(props) {
         localStorage.setItem(`recipe_${props.id}_user_${id}`, `${!isSaved}`);
         setIsSaved(!isSaved);
       } else {
-        console.error(`Failed to ${isSaved ? '' : 'un'}save recipe:`, data.message);
+        console.error(
+          `Failed to ${isSaved ? '' : 'un'}save recipe:`,
+          data.message,
+        );
       }
     } catch (error) {
       console.error(`Error ${isSaved ? '' : 'un'}saving recipe:`, error);
@@ -98,11 +108,16 @@ function RecipeCard(props) {
       >
         {props.title}
       </Typography>
-      {token &&
-      <IconButton aria-label="save recipe" onClick={()=>{fetchData(true)}}>
-        <FavoriteIcon color={isSaved ? 'error' : 'inherit'} />
-      </IconButton>
-      }
+      {token && (
+        <IconButton
+          aria-label="save recipe"
+          onClick={() => {
+            fetchData(true);
+          }}
+        >
+          <FavoriteIcon color={isSaved ? 'error' : 'inherit'} />
+        </IconButton>
+      )}
       <Accordion
         className="ingredients-accordion"
         expanded={expanded}
