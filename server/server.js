@@ -220,7 +220,7 @@ app.post('/api/search', async (req, res) => {
     }
     const queryString = queryParams.toString();
     const response = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?${queryString}&number=10&apiKey=${API_KEY}`,
+      `https://api.spoonacular.com/recipes/complexSearch?${queryString}&number=5&apiKey=${API_KEY}`,
     );
     res.json(response.data);
   } catch (error) {
