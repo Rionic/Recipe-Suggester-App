@@ -42,6 +42,7 @@ const UseRecipeSearch = (initialSearchCriteria) => {
       });
 
       if (!response.ok) {
+        alert('Server error. This is likely due the 150 requests/day limit being hit on the Spoonacular API');
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
@@ -70,12 +71,6 @@ const UseRecipeSearch = (initialSearchCriteria) => {
       console.error('There was a problem with the fetch operation:', error);
     }
   };
-
-  useEffect(() => {
-    if (searchCriteria.ingredients) {
-      handleSubmit();
-    }
-  }, [searchCriteria.ingredients]);
 
   return {
     recipes,

@@ -58,6 +58,7 @@ function SavedRecipes() {
         });
         setSavedRecipes(updatedSavedRecipes);
       } else {
+        alert('Server error. This is likely due the 150 requests/day limit being hit on the Spoonacular API');
         console.error('Failed to fetch recipe details');
       }
     } catch (error) {
