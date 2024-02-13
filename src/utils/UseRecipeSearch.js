@@ -19,8 +19,8 @@ const UseRecipeSearch = (initialSearchCriteria) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const fetchedRecipes = await fetchRecipes();
     const recipeIds = fetchedRecipes.map((recipe) => recipe.id);
     setRecipes(fetchedRecipes);

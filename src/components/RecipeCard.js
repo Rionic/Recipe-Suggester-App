@@ -28,11 +28,14 @@ function RecipeCard(props) {
     fetchData(false);
   }, []);
 
+  useEffect(() => {
+    setIsSaved(localStorage.getItem(`recipe_${props.id}_user_${id}`) === 'true');
+  }, [id]);
+
   const fetchData = async (buttonClicked) => {
     if (!token) return;
     try {
       const data = await FetchInfo(token);
-      console.log(data);
       setId(data.userInfo.id);
       if (buttonClicked) handleSaveRecipe();
     } catch (error) {
@@ -42,10 +45,8 @@ function RecipeCard(props) {
 
   const handleSaveRecipe = async () => {
     if (!id) {
-      console.log('User ID missing');
       return;
     }
-    console.log(`http://localhost:3001/api/${isSaved ? 'un' : ''}save-recipe`)
     try {
       const response = await fetch(`http://localhost:3001/api/${isSaved ? 'un' : ''}save-recipe`, {
         method: 'POST',
@@ -62,7 +63,6 @@ function RecipeCard(props) {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(`Recipe ${isSaved ? 'un' : ''}saved successfully`);
         localStorage.setItem(`recipe_${props.id}_user_${id}`, `${!isSaved}`);
         setIsSaved(!isSaved);
       } else {

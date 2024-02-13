@@ -48,7 +48,6 @@ pool.query(`
 });
 
 app.get('/api/fetch-saved-recipes', AuthenticateJWT, async (req, res) => {
-  console.log(req.body);
   const { email } = req.user;
   try {
     pool.query('SELECT recipe_id FROM user_recipes WHERE user_id = (SELECT id FROM users WHERE email = ?)',
@@ -60,7 +59,6 @@ app.get('/api/fetch-saved-recipes', AuthenticateJWT, async (req, res) => {
       }
       else {
         if (results && results.length > 0) {
-          console.log(results);
           const savedRecipeIds = results;
           res.json({ savedRecipeIds });
         } else {
@@ -95,7 +93,6 @@ app.post('/api/unsave-recipe', AuthenticateJWT, async (req, res) => {
 });
 
 app.post('/api/save-recipe', AuthenticateJWT, async (req, res) => {
-  console.log(req.body);
   const { user_id, recipe_id} = req.body;
   try {
     pool.query('INSERT INTO user_recipes (user_id, recipe_id) VALUES (?, ?)',
@@ -161,7 +158,6 @@ app.post('/api/login', async (req, res) => {
               hashedPassword,
             );
             if (passwordMatch) {
-              console.log('secret', JWT_SECRET);
               const token = jwt.sign({ email }, JWT_SECRET, {
                 expiresIn: '1d',
               });
@@ -222,10 +218,9 @@ app.post('/api/search', async (req, res) => {
     if (recipeName) {
       queryParams.append('query', recipeName);
     }
-
     const queryString = queryParams.toString();
     const response = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?${queryString}&number=1&apiKey=${API_KEY}`,
+      `https://api.spoonacular.com/recipes/complexSearch?${queryString}&number=10&apiKey=${API_KEY}`,
     );
     res.json(response.data);
   } catch (error) {
@@ -243,14 +238,17 @@ app.get('/api/recipe/ingredients', async (req, res) => {
 
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/informationBulk?ids=${
-        recipeIds.split(',')[0]
+        recipeIds.split(',')
       }&apiKey=${API_KEY}`,
     );
     if (!response || response.status !== 200) {
       throw new Error('Failed to fetch recipe details');
     }
     const recipeDetails = response.data;
-    let urlList = [];
+    const urlList = recipeDetails.map((recipe) => recipe.sourceUrl);
+    const titleList = recipeDetails.map((recipe) => recipe.title);
+    const imageList = recipeDetails.map((recipe) => recipe.image);
+
     const ingredientsList = recipeDetails.map((recipe) => {
       let ingredients = recipe.extendedIngredients.map((ingredient) => {
         return {
@@ -259,12 +257,13 @@ app.get('/api/recipe/ingredients', async (req, res) => {
           unit: ingredient.unit,
         };
       });
-      urlList.push(recipe.sourceUrl);
       return ingredients;
     });
     const sendData = {
       ingredientsList: ingredientsList,
       urlList: urlList,
+      titleList: titleList,
+      imageList: imageList,
     };
     res.json(sendData);
   } catch (error) {
