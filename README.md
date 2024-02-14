@@ -8,11 +8,13 @@ The API being used for this application has a small request limit of 150/day on 
 
 ## Steps to Run
 
-### 1. In the root folder, run `npm start`
+### 1. In the root folder, run `npm install`
 
-### 2. Create another terminal window and run `cd server`
+### 2. After installation is complete, run `npm start`
 
-### 3. Once in the server directory, run `node server.js`
+### 3. Create another terminal window and run `cd server`
+
+### 4. Once in the server directory, run `node server.js`
 
 ### You're good to go!
 
