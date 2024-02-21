@@ -8,13 +8,17 @@ The API being used for this application has a small request limit of 150/day on 
 
 ## Steps to Run
 
-### 1. In the root folder, run `npm install`
+### 1. Create your local database by following these steps: https://www.inmotionhosting.com/support/server/databases/create-a-mysql-database/
 
-### 2. After installation is complete, run `npm start`
+### 2. Update the .env file with the correct info from your database setup
 
-### 3. Create another terminal window and run `cd server`
+### 3. In the root folder, run `npm install`
 
-### 4. Once in the server directory, run `node server.js`
+### 4. After installation is complete, run `npm start`
+
+### 5. Create another terminal window and run `cd server`
+
+### 6. Once in the server directory, run `node server.js`
 
 ### You're good to go!
 

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const app = express();
@@ -16,10 +17,10 @@ const PORT = process.env.PORT || 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'secret',
-  database: 'recipe_suggester',
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'secret',
+  database: process.env.DB_NAME || 'recipe_suggester',
 });
 
 pool.query(
