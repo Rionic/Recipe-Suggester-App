@@ -6,6 +6,8 @@ This is a full-stack web application I created in my spare time. It allows the u
 
 The API being used for this application has a small request limit of 150/day on the free version, so it is very easy to hit this limit if you decide to spam requests, so please keep this in mind!
 
+[test](./public/images/vegan-pasta.jpg)
+
 ## Steps to Run
 
 ### 1. Create your local database by following these steps: https://www.inmotionhosting.com/support/server/databases/create-a-mysql-database/
