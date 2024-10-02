@@ -11,8 +11,6 @@ The API being used for this application has a small request limit of 150/day on 
 [Saved Recipes](./public/images/Screenshot_3.png)
 [Sign Up](./public/images/Screenshot_4.png)
 
-Make sure you have MySQL, Workbench (or some MySQL utility for DB creation), and Node installed.
-
 ## Steps to Run
 
 ### 1. Create your local database by following these steps: https://www.inmotionhosting.com/support/server/databases/create-a-mysql-database/
