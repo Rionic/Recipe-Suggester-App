@@ -11,6 +11,8 @@ The API being used for this application has a small request limit of 150/day on 
 [Saved Recipes](./public/images/Screenshot_3.png)
 [Sign Up](./public/images/Screenshot_4.png)
 
+Make sure you have MySQL, Workbench (or some MySQL utility for DB creation), and Node installed.
+
 ## Steps to Run
 
 ### 1. Create your local database by following these steps: https://www.inmotionhosting.com/support/server/databases/create-a-mysql-database/
@@ -21,7 +23,7 @@ The API being used for this application has a small request limit of 150/day on 
 
 ### 4. After installation is complete, run `npm start`
 
-### 5. Create another terminal window and run `cd server`
+### 5. Create another terminal window and run `cd src`, and then `cd server`
 
 ### 6. Once in the server directory, run `node server.js`
 
