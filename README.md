@@ -21,7 +21,7 @@ The API being used for this application has a small request limit of 150/day on 
 
 ### 4. After installation is complete, run `npm start`
 
-### 5. Create another terminal window and run `cd src`, and then `cd server`
+### 5. Create another terminal window and run `cd server`
 
 ### 6. Once in the server directory, run `node server.js`
 
