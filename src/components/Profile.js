@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import Header from './Header';
+import Header from './Header.js';
 import FetchInfo from '../utils/FetchInfo.js';
 import { AuthContext } from '../AuthContext.js';
 

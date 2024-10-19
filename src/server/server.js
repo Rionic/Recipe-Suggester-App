@@ -13,7 +13,7 @@ const mockData = require('./MockData');
 const AuthenticateJWT = require('./AuthenticateJWT');
 const { JWT_SECRET } = require('./Config');
 
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
 
 const pool = mysql.createPool({
@@ -126,6 +126,7 @@ app.post('/api/save-recipe', AuthenticateJWT, async (req, res) => {
 
 app.get('/api/fetch-user-info', AuthenticateJWT, async (req, res) => {
   const userEmail = req.user.email;
+  console.log('user email', userEmail);
   try {
     pool.query(
       'SELECT id, first_name, last_name FROM users WHERE email = ?',
@@ -202,7 +203,7 @@ app.post('/api/signup', async (req, res) => {
           res.status(500).json({ error: 'Error signing up' });
         } else {
           console.log('User signed up successfully');
-          const token = jwt.sign({}, JWT_SECRET, { expiresIn: '1d' });
+          const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: '1d' });
           res.json({ token });
         }
       },
