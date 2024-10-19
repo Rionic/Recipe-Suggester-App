@@ -17,7 +17,7 @@ The API being used for this application has a small request limit of 150/day on 
 
 ### 2. Copy and paste the following statements into the MySQL database you created on the command line
 ```
-  CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(255),
   last_name VARCHAR(255),
