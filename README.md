@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS user_recipes (
 
 ### 5. After installation is complete, run `npm start`
 
-### 6. Create another terminal window and navigate to the server directory
+### 6. Create another terminal window and run `cd src/server` 
 
 ### 7. Once in the server directory, run `node server.js`
 
