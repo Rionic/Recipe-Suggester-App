@@ -17,7 +17,7 @@ The API being used for this application has a small request limit of 150/day on 
 
 ### 2. Copy and paste the following statements into the MySQL database you created on the command line
 ```
-  CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(255),
   last_name VARCHAR(255),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS user_recipes (
 
 ### 5. After installation is complete, run `npm start`
 
-### 6. Create another terminal window and navigate to the server directory
+### 6. Create another terminal window and run `cd src/server` 
 
 ### 7. Once in the server directory, run `node server.js`
 
