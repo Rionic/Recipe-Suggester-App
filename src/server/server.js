@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 
 const mockData = require('./MockData');
 const AuthenticateJWT = require('./AuthenticateJWT');
-const { JWT_SECRET } = require('./Config');
+const { JWT_SECRET } = require('./config');
 
 const PORT = 3001;
 const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';

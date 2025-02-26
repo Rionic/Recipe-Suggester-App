@@ -1,27 +1,49 @@
-version: '3'
+version: "3.8"
+
 services:
-  server:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
     build:
       context: .
       dockerfile: src/server/Dockerfile
     ports:
       - "3001:3001"
     depends_on:
-      - db
-    volumes:
-      - ./src/server:/server
-
-  client:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+      db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=db
+      - DB_USER=${DB_USER:-root}  
+      - DB_PASSWORD=${DB_PASSWORD:-secret}  
+      - DB_NAME=${DB_NAME:-recipe_suggester}  
+    restart: always
 
   db:
-    image: mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: recipe_suggester
+    image: mysql:8.0
+    container_name: mysql_db
     ports:
       - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret} 
+      MYSQL_DATABASE: ${DB_NAME:-recipe_suggester}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
