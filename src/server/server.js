@@ -23,37 +23,6 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || 'recipe_suggester',
 });
 
-pool.query(
-  `
-  CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255)
-  );
-`,
-  (error) => {
-    if (error) console.error('Error setting up users table:', error);
-    else console.log('users table setup successful');
-  },
-);
-
-pool.query(
-  `
-  CREATE TABLE IF NOT EXISTS user_recipes (
-    user_recipe_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    recipe_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-  );
-`,
-  (error) => {
-    if (error) console.error('Error setting up user_recipes table:', error);
-    else console.log('user_recipes table setup successful');
-  },
-);
-
 app.get('/api/fetch-saved-recipes', AuthenticateJWT, async (req, res) => {
   const { email } = req.user;
   try {
