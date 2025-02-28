@@ -17,7 +17,7 @@ docker-compose up --build
 
 
 
-Current features
+## Current features
 
 - React as framework
 - Material UI for crisp and clean interface
@@ -27,12 +27,12 @@ Current features
 - Login system
 - Save recipes to account
 - Database
-
-Potential Future features
-
 - Dockerization
+
+## Potential Future features
+
 - Cloud DB
-- Deployment
+- Web delopyment
 - More detailed profile page
 - Nicer UI
 - Test cases
