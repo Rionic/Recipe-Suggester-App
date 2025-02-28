@@ -19,7 +19,7 @@ The API being used for this application has a small request limit of 150/day on 
    git clone https://github.com/Rionic/Recipe-Suggester-App.git
 3. Navigate to the project folder:
    ```bash
-   cd my-recipe app
+   cd my-recipe-app
 4. Start the app:
    ```bash
    docker-compose up --build
