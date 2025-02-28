@@ -13,9 +13,17 @@ The API being used for this application has a small request limit of 150/day on 
 
 ## Steps to Run
 
-Make sure [docker]((https://www.docker.com/get-started/)) is installed.
-run `docker-compose up --build`
-
+1. Install [Docker](https://docs.docker.com/get-docker/) and ensure it is running.
+2. Clone this repo:
+   ```bash
+   git clone <repo-url>
+3. Navigate to the project folder:
+   ```bash
+   cd my-recipe app
+4. Start the app:
+   ```bash
+   docker-compose up --build
+   
 ## Current features
 
 - React as framework
