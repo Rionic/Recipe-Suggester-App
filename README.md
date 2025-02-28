@@ -13,7 +13,8 @@ The API being used for this application has a small request limit of 150/day on 
 
 ## Steps to Run
 
-docker-compose up --build
+Make sure [docker]((https://www.docker.com/get-started/)) is installed.
+run `docker-compose up --build`
 
 ## Current features
 
