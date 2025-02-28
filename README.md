@@ -16,7 +16,7 @@ The API being used for this application has a small request limit of 150/day on 
 1. Install [Docker](https://docs.docker.com/get-docker/) and ensure it is running.
 2. Clone this repo:
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/Rionic/Recipe-Suggester-App.git
 3. Navigate to the project folder:
    ```bash
    cd my-recipe app
