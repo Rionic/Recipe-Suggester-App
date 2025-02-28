@@ -1,6 +1,6 @@
 # Welcome to Recipe Suggester!
 
-This is a full-stack web application I created in my spare time. It allows the user to find a recipe based off of paramaters received such as ingredients, recipe name, and dietary restrictions! The user is able to make an account and saved recipes that he/she likes to their account! 
+This is a full-stack web application I created in my spare time. It allows the user to find a recipe based off of the parameters: ingredients, recipe name, and dietary restrictions. The user is able to make an account and save recipes that they like to their account!
 
 *WARNING*
 
@@ -14,8 +14,6 @@ The API being used for this application has a small request limit of 150/day on 
 ## Steps to Run
 
 docker-compose up --build
-
-
 
 ## Current features
 
