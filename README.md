@@ -6,11 +6,6 @@ This is a full-stack web application I created in my spare time. It allows the u
 
 The API being used for this application has a small request limit of 150/day on the free version. It is very easy to hit this limit if you decide to spam requests, so please keep this in mind.
 
-## Screenshots
-![Search Page](./public/images/Screenshot_2.png)
-![Saved Recipes](./public/images/Screenshot_3.png)
-![Sign Up](./public/images/Screenshot_4.png)
-
 ## Steps to Run
 
 1. Install [Docker](https://docs.docker.com/get-docker/) and ensure it is running.
@@ -23,6 +18,11 @@ The API being used for this application has a small request limit of 150/day on 
 4. Start the app:
    ```bash
    docker-compose up --build
+
+## Screenshots
+![Search Page](./public/images/Screenshot_2.png)
+![Saved Recipes](./public/images/Screenshot_3.png)
+![Sign Up](./public/images/Screenshot_4.png)
    
 ## Current features
 
