@@ -44,7 +44,7 @@ app.get('/api/fetch-saved-recipes', AuthenticateJWT, async (req, res) => {
       },
     );
   } catch (error) {
-    console.error('Error');
+    console.error('Error fetching saved recipes');
     res.status(500).json({ error: 'Internal server error' });
   }
 });
