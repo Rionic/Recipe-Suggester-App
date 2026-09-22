@@ -15,7 +15,10 @@ The API being used for this application has a small request limit of 150/day on 
 3. Navigate to the project folder:
    ```bash
    cd Recipe-Suggester-App
-4. Start the app:
+4. Copy `src/server/.env.example` to `src/server/.env` and fill in a Spoonacular API key (get one at https://spoonacular.com/food-api/console#Profile):
+   ```bash
+   cp src/server/.env.example src/server/.env
+5. Start the app:
    ```bash
    docker-compose up --build
 

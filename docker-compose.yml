@@ -22,9 +22,10 @@ services:
         condition: service_healthy
     environment:
       - DB_HOST=db
-      - DB_USER=${DB_USER:-root}  
-      - DB_PASSWORD=${DB_PASSWORD:-secret}  
-      - DB_NAME=${DB_NAME:-recipe_suggester}  
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
+      - DB_NAME=${DB_NAME:-recipe_suggester}
+      - SPOONACULAR_API_KEY=${SPOONACULAR_API_KEY}
     restart: always
 
   db:

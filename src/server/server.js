@@ -14,7 +14,12 @@ const AuthenticateJWT = require('./AuthenticateJWT');
 const { JWT_SECRET } = require('./config');
 
 const PORT = 3001;
-const API_KEY = '2d60a10270894aaea2c880a8df71f2e3';
+const API_KEY = process.env.SPOONACULAR_API_KEY;
+
+if (!API_KEY) {
+  console.error('Missing SPOONACULAR_API_KEY environment variable.');
+  process.exit(1);
+}
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
